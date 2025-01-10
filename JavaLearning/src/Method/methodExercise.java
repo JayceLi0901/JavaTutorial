@@ -1,7 +1,5 @@
 package Method;
 
-import javafx.scene.shape.Circle;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -26,9 +24,9 @@ public class methodExercise {
         passObject.printAreas(c,5);
 
         //rock paper scissor
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your choice" + sc.nextLine());
-
+        RPS rps = new RPS();
+        int[] resArr = rps.reuslt();
+        System.out.println("您赢了" + resArr[0] + "次，输了" + resArr[1] + "次");
     }
 }
 
@@ -83,19 +81,46 @@ class PassObject{
 }
 
 class RPS{
+    int win = 0;
+    int loss = 0;
+    boolean keepPlaying = true;
 
-    public int reuslt(int input){
-        Random random = new Random();
-        int comInput = random.nextInt(2);
-        //平局
-        if(input==comInput){
-            return 0;
-        } // 人赢
-        else if((comInput==0 && input==2) || input==comInput-1){
-            return 1;
-        } //电脑赢
-        else{
-            return -1;
+    public int[] reuslt(){
+
+        while(keepPlaying){
+            Random random = new Random();
+            int comInput = random.nextInt(2);
+
+            Scanner sc = new Scanner(System.in);
+            System.out.println("请输入 0 1 2 或 -1:");
+            int input= Integer.parseInt(sc.nextLine());
+
+            if(input == -1){
+                keepPlaying = false;
+                System.out.println("您已退出游戏");
+            }
+            //平局
+            else if(input==comInput){
+                System.out.println("电脑出"+comInput);
+                System.out.println("平局");
+                System.out.println("==========================================");
+            }
+            // 人赢
+            else if((comInput==0 && input==2) || input==comInput-1){
+                win += 1;
+                System.out.println("电脑出"+comInput);
+                System.out.println("这是你第"+win+"次获胜");
+                System.out.println("==========================================");
+            }
+            //电脑赢
+            else if((comInput==2 && input==0) || input==comInput+1){
+                loss += 1;
+                System.out.println("电脑出"+comInput);
+                System.out.println("这是你第"+loss+"次失败");
+                System.out.println("==========================================");
+            }
         }
+        int[] resArray = {win, loss};
+        return resArray;
     }
 }
