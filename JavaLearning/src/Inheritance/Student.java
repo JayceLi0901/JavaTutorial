@@ -1,9 +1,10 @@
 package Inheritance;
 
-public class Student {
+public class Student  {
     public String name;
     public int age;
     private double score;
+    private int id;
 
     public void setScore(double score) {
         this.score = score;
