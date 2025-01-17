@@ -7,7 +7,7 @@ public class Encapsulation{
     public int age;
     public double salary;
 
-    public String getName() { 
+    public String getName() {
         return name;
     }
 
